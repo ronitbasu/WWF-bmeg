@@ -14,6 +14,7 @@ th {
 </head>
 
 <?php
+include "search_material_js.php";
 
 // check for failed connection
 if ($mysqli->connect_errno) {
@@ -21,7 +22,7 @@ if ($mysqli->connect_errno) {
 }
 
 // gather data from table and store in result
-$sql = "SELECT ID, Material, Types_of_Use, Issues_in_material_extraction, Issues_in_production, Environmental_Benefits, Potential_material_alternatives, Better_practices, Key_Specific_Resources FROM bmeg";
+$sql = "SELECT ID, Material, Impact, Embodied_Energy_Production, CO2_Footprint_Production, Water_Usage, Embodied_Energy_Processing, CO2_Footprint_Processing, Price, Key_Specific_Resources FROM `Environmental_Impacts`";
 
 $result = $mysqli->query($sql);
 
@@ -29,7 +30,6 @@ if ($result->num_rows > 0) {
     // output data of each row
 
 ?>
-
 
 <!-- create headers for table -->
 <table id = "table" class="table table-condensed">
@@ -42,25 +42,28 @@ if ($result->num_rows > 0) {
 				Material
 			</th>
 			<th>
-				Types of Use
+				Impact During Stages
 			</th>
 			<th>
-				Issues in Material Extraction
+				Embodied Energy (Production)
 			</th>
 			<th>
-				Issues in Production
+				CO2 Footprint (Production)
 			</th>
 			<th>
-				Environmental Benefits
+				Water Usage
 			</th>
 			<th>
-				Potential Material Alternatives
+				Embodied Energy (Processing)
 			</th>
 			<th>
-				Better Practices
+				CO2 Footprint (Processing)
 			</th>
 			<th>
-				Key Specific Resources
+				Price (USD)
+			</th>
+			<th>
+				References
 			</th>
 		</tr>
 	</thead>
@@ -71,45 +74,68 @@ if ($result->num_rows > 0) {
 ?>
 
 <!-- display row -->
+
 <tr>
 			<td>
-    <?php
-		echo $row["ID"]
-		?>
-			</td>
-			<td>
-				<?php
-				echo "<strong>".$row["Material"]
+    			<?php
+				echo $row["ID"]
 				?>
 			</td>
 			<td>
 				<?php
-				echo $row["Types_of_Use"]
+  				$material = $row["Material"]
+				?>
+				<a href="#" onclick="search_material(event)"> <?php echo $material ?> </a>
+				<script> 
+
+	function search_material (material) {
+	// return true or false, depending on whether you want to allow the `href` property to follow through or not
+	var material = material.target.innerText
+	console.log(material)
+	document.getElementById("sub-heading").innerHTML  = "<center> <legend>Better Practices</legend> </center>";
+	document.getElementById("table").innerHTML  = "<?php search_material($material);?>";
+	document.getElementById("s2").innerHTML  = "<center> <legend>Environmental_Impacts</legend> </center>";
+	document.getElementById("t2").innerHTML  = "<?php search_material2($material);?>";
+
+
+	}
+
+
+				</script>
+			</td>
+			<td>
+				<?php
+				echo $row["Impact"]
 				?>
 			</td>
 			<td>
 				<?php
-				echo $row["Issues_in_material_extraction"]
+				echo $row["Embodied_Energy_Production"]
 				?>
 			</td>
 			<td>
 				<?php
-				echo $row["Issues_in_production"]
+				echo $row["CO2_Footprint_Production"]
 				?>
 			</td>
 			<td>
 				<?php
-				echo $row["Environmental_Benefits"]
+				echo $row["Water_Usage"]
 				?>
 			</td>
-			<td>
+						<td>
 				<?php
-				echo $row["Potential_material_alternatives"]
+				echo $row["Embodied_Energy_Processing"]
 				?>
 			</td>
-			<td>
+						<td>
 				<?php
-				echo $row["Better_practices"]
+				echo $row["CO2_Footprint_Processing"]
+				?>
+			</td>
+						<td>
+				<?php
+				echo $row["Price"]
 				?>
 			</td>
 			<td>

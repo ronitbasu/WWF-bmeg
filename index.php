@@ -4,18 +4,14 @@
 
 <center> <h1> Building Material Selection and Use: An Environmental Guide </h1> </center>
 
-<p id="demo"></p>
-
 <?php 
 
 include "db_connect.php";
 ?>
 
-<form class="form-horizontal" action="search_keyword.php">
+<form class="form-horizontal" action="search_keyword.php" method="get">
 <fieldset>
-
 <!-- Form Name -->
-
 <br />
 <center> <legend>Search for a Material</legend> </center>
 <br />
@@ -27,7 +23,6 @@ include "db_connect.php";
     <p class="help-block">Enter a material name or use to search for in the BMEG</p>
   </div>
 </div>
-
 <!-- Button -->
 <div class="form-group">
   <label class="col-md-4 control-label" for="submit"></label>
@@ -44,17 +39,19 @@ include "db_connect.php";
 <?php
 include "add_filter_js.php";
 include "add_filter_css.php";
-?>
-
-
-<?php
-
 
 echo '<br />';
 echo '<br />';
 
-include "search_all_materials.php";
-  
+echo '<div id = "sub-heading"></div>';
+
+//include "dropdown_js";
+
+
+echo '<br />';
+
+include "search_all_materials_new.php";
+/*
 ?>
 
 <hr
@@ -92,6 +89,16 @@ include "search_all_materials.php";
   <input type="submit" value="Submit">
 </form>
 
+*/
+?>
+
+<br>
+<div id = "s2"></div>
+<table id="t2" class="table table-condensed"></table>
+<table id="t3"></table>
+<div id = "s3"></div>
+
+
 
 
 <br>
@@ -100,7 +107,6 @@ include "search_all_materials.php";
 <br>
 
 <?php
-//<div id = "demo"> Hi </div>
 
 
 $mysqli->close();
@@ -109,6 +115,10 @@ $mysqli->close();
 
 </body>
 
+<div id = "s2"></div>
+<table id="t2"></table>
+<table id="t3"></table>
+<div id = "s3"></div>
 <head>
 
 <!-- Latest compiled and minified CSS -->

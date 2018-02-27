@@ -31,7 +31,7 @@ document.getElementById("table").innerHTML  = "<?php php_funcb();?>";
 
 function myFilterc(){
 document.getElementById("table").innerHTML  = "<?php php_funcc();?>";
-}
+}   
 
 function myFilterd(){
 document.getElementById("table").innerHTML  = "<?php php_funcd();?>";

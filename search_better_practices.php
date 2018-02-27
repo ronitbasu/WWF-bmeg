@@ -1,5 +1,8 @@
 
 <head>
+<?php
+include "db_connect.php";
+?>
 <!-- change color while hovering over table row and set color and background for table heading -->
 <style>
 tr:hover {
@@ -21,7 +24,7 @@ if ($mysqli->connect_errno) {
 }
 
 // gather data from table and store in result
-$sql = "SELECT ID, Material, Types_of_Use, Issues_in_material_extraction, Issues_in_production, Environmental_Benefits, Potential_material_alternatives, Better_practices, Key_Specific_Resources FROM bmeg";
+$sql = "SELECT ID, Material, Composition, Technical_Use, Better_Practices, Disposal_and_Recycle, Other_Comments, Potential_Alternatives FROM better_practices_and_alternatives";
 
 $result = $mysqli->query($sql);
 
@@ -29,7 +32,6 @@ if ($result->num_rows > 0) {
     // output data of each row
 
 ?>
-
 
 <!-- create headers for table -->
 <table id = "table" class="table table-condensed">
@@ -42,25 +44,22 @@ if ($result->num_rows > 0) {
 				Material
 			</th>
 			<th>
-				Types of Use
+				Composition
 			</th>
 			<th>
-				Issues in Material Extraction
-			</th>
-			<th>
-				Issues in Production
-			</th>
-			<th>
-				Environmental Benefits
-			</th>
-			<th>
-				Potential Material Alternatives
+				Technical Use
 			</th>
 			<th>
 				Better Practices
 			</th>
 			<th>
-				Key Specific Resources
+				Disposal/Recycle
+			</th>
+			<th>
+				Other_Comments
+			</th>
+			<th>
+				Potential_Alternatives
 			</th>
 		</tr>
 	</thead>
@@ -73,9 +72,9 @@ if ($result->num_rows > 0) {
 <!-- display row -->
 <tr>
 			<td>
-    <?php
-		echo $row["ID"]
-		?>
+    			<?php
+				echo $row["ID"]
+				?>
 			</td>
 			<td>
 				<?php
@@ -84,40 +83,32 @@ if ($result->num_rows > 0) {
 			</td>
 			<td>
 				<?php
-				echo $row["Types_of_Use"]
+				echo $row["Composition"]
 				?>
 			</td>
 			<td>
 				<?php
-				echo $row["Issues_in_material_extraction"]
+				echo $row["Technical_Use"]
 				?>
 			</td>
 			<td>
 				<?php
-				echo $row["Issues_in_production"]
+				echo $row["Better_Practices"]
 				?>
 			</td>
 			<td>
 				<?php
-				echo $row["Environmental_Benefits"]
+				echo $row["Disposal_and_Recycle"]
 				?>
 			</td>
 			<td>
 				<?php
-				echo $row["Potential_material_alternatives"]
+				echo $row["Other_Comments"]
 				?>
 			</td>
 			<td>
 				<?php
-				echo $row["Better_practices"]
-				?>
-			</td>
-			<td>
-				<?php
-				//converts Key_Specific_Resources to url
-				$url = '@(http)?(s)?(://)?(([a-zA-Z])([-\w]+\.)+([^\s\.]+[^\s]*)+[^,.\s])@';
-                $string = preg_replace($url, '<a href="http$2://$4" target="_blank" title="$0">$0</a>', $row["Key_Specific_Resources"]);
-				echo $string;
+				echo $row["Potential_Alternatives"]
 				?>
 			</td>
 		</tr>
